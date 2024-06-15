@@ -17,7 +17,7 @@ class XmlController extends Controller
 {
     public function uploadXML(Request $request)
     {
-        set_time_limit(120);
+        set_time_limit(500);
         try {
             if (!$request->hasFile('file')) {
                 throw new \Exception('No XML file uploaded.');
