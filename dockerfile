@@ -28,8 +28,9 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libldap2-dev \
     libxml2-dev \
-    libmcrypt-dev \
-    libsqlite3-dev
+    libsqlite3-dev \
+    pkg-config \
+    grep
 
 # Limpiar cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -52,6 +53,9 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
     sodium \
     xsl \
     zip
+
+# Verificar que las extensiones estén habilitadas
+RUN php -m | grep -i xsl && php -m | grep -i intl && php -m | grep -i gd
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
