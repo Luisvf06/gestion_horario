@@ -4,7 +4,19 @@ FROM php:8.2-fpm
 # Instalar dependencias del sistema y extensiones PHP necesarias
 RUN apt-get update && apt-get install -y \
     libxslt-dev \
-    && docker-php-ext-install xsl
+    libjpeg-dev \
+    libpng-dev \
+    libwebp-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    libicu-dev \
+    libxml2-dev \
+    libonig-dev \
+    libbz2-dev \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install gd xsl intl exif pdo_mysql soap sockets zip bcmath
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
