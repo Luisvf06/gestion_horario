@@ -79,14 +79,14 @@ class XmlController extends Controller
                 'franjas' => $franjas,
                 'periodos' => $periodos,
                 'horarios' => $horarios
-                
-            ], 200);
+                ], 200
+            );
         } catch (\Exception $e) {
             Log::error('Error parsing XML: ' . $e->getMessage());
             return response()->json(['error' => 'Error parsing XML: ' . $e->getMessage()], 400);
         }
     }
-
+    
     private function extractTableData($xml, $tableName)
     {
         $result = [];
