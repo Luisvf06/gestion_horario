@@ -23,7 +23,7 @@ class XmlController extends Controller
                 throw new \Exception('No XML file uploaded.');
             }
 
-            $file = $request->file('file');
+            $file = $request->file('file');//comprueba que lo que recibe es tipo archivo
             $xmlString = file_get_contents($file->getPathname());
             $xml = simplexml_load_string($xmlString, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -32,7 +32,7 @@ class XmlController extends Controller
             }
 
             Log::info('XML Structure:', ['xml' => $xml->asXML()]);
-
+            //Recorre las tablas del xml y lo envia a un controlador según el nombre de la tabla
             $asignaturas = $this->extractTableData($xml, 'asignaturas');
             $grupos = $this->extractTableData($xml, 'grupos');
             $profesores = $this->extractTableData($xml, 'profesores');

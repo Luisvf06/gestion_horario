@@ -19,6 +19,7 @@ class PDFController extends Controller
     public function generatePDF(Request $request)
     {
         $selectedDate = $request->query('date');
+        //Carbon es paar trabajar con fechas y formatearlas de forma más cómoda
         $selectedWeek = Carbon::parse($selectedDate)->dayOfWeek;
     
         // No incluyo domingos y sábados porque no tienen sentido
