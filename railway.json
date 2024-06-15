@@ -1,13 +1,11 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "DOCKER",
-    "dockerfilePath": "Dockerfile"
+    "buildCommand": "composer install --no-dev --optimize-autoloader && npm install --production && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan migrate --force && php artisan db:seed --force"
   },
   "deploy": {
-    "runtime": "DOCKER",
     "numReplicas": 1,
-    "startCommand": null,
+    "startCommand": "php artisan serve --host=0.0.0.0 --port=$PORT",
     "sleepApplication": false,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
