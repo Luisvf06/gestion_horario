@@ -10,7 +10,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetPasswordMail;
- 
+
 class PasswordController extends Controller
 {
     /**
